@@ -2,4 +2,4 @@
 start = ord('a')
 end = ord('z')
 for start in range(start, end + 1):
-    print(chr(start), end="")
+    print("{}".format(chr(start)), end="")
