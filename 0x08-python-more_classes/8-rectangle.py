@@ -4,7 +4,6 @@
 
 class Rectangle:
     """Represents a rectangle with various properties and methods."""
-
     number_of_instances = 0
     print_symbol = "#"
 
