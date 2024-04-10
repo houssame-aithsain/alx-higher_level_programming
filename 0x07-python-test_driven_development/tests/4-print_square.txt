@@ -1,0 +1,52 @@
+The ``print_square`` function
+=============================
+
+Using ``print_square``
+-----------------------
+
+This is an example text file in reStructuredText format. First import
+``print_square`` from the ``print_square_module`` module:
+
+    >>> from print_square_module import print_square
+
+Now use it to print a square of a given size:
+
+    >>> print_square(3)
+    ###
+    ###
+    ###
+
+Printing a square of size 5:
+
+    >>> print_square(5)
+    #####
+    #####
+    #####
+    #####
+    #####
+
+Using a square of size 1:
+
+    >>> print_square(1)
+    #
+
+Attempting to print a square of size 0 (Edge Case):
+
+    >>> print_square(0)
+    (No output expected, as the square has no size)
+
+Attempting to print a square of negative size (Error Case):
+
+    >>> print_square(-2)
+    Traceback (most recent call last):
+        ...
+    ValueError: size must be >= 0
+
+Using a non-integer size (Error Case):
+
+    >>> print_square("three")
+    Traceback (most recent call last):
+        ...
+    TypeError: size must be an integer
+
+The ``print_square`` function provides a simple way to print a square of a given size, while handling various edge cases and error scenarios gracefully.

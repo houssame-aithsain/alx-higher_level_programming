@@ -1,0 +1,73 @@
+The ``addition_module`` module
+==============================
+
+Using ``add_integer``
+---------------------
+
+This document provides examples of using the ``add_integer`` function from the ``addition_module``, alongside various test cases to illustrate its functionality and error handling.
+
+### Test Case 1: Integer Addition
+
+Adding two positive integers together:
+
+    >>> add_integer(2, 3)
+    5
+
+### Test Case 2: Default Parameter Usage
+
+Utilizing the default parameter value for the second integer (98):
+
+    >>> add_integer(10)
+    108
+
+### Test Case 3: Float Conversion
+
+Adding a float to an integer, where the float is automatically converted to an integer:
+
+    >>> add_integer(10.75, 20)
+    30
+
+### Test Case 4: Negative Values
+
+Combining a negative integer with a positive integer:
+
+    >>> add_integer(-2, 3)
+    1
+
+### Test Case 5: Float and Float Addition
+
+Adding two floats, which are both converted to integers before addition:
+
+    >>> add_integer(1.99, 2.01)
+    3
+
+### Test Case 6: Invalid Type for a
+
+Demonstrating error handling when the first argument is not an integer or float:
+
+    >>> add_integer("twenty", 10)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+### Test Case 7: Invalid Type for b
+
+Showing the function's response when the second argument is of an invalid type:
+
+    >>> add_integer(10, [20])
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
+
+### Test Case 8: Both Parameters Invalid Types
+
+Attempting to use invalid types for both parameters results in consecutive type errors, starting with the first parameter:
+
+    >>> add_integer("ten", ["twenty"])
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+    # Correcting "a" to a valid type would then raise:
+    TypeError: b must be an integer
+
+This guide illustrates the versatile functionality of ``add_integer``, capable of handling both integers and floats (by converting them to integers), and also shows its robust error checking for non-numeric types.

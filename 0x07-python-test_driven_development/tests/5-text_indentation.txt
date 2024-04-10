@@ -1,0 +1,47 @@
+==================================
+The ``text_indentation`` function
+==================================
+
+Using ``text_indentation``
+---------------------------
+
+This is an example text file in reStructuredText format. First import
+``text_indentation`` from the ``text_indentation_module`` module:
+
+    >>> from text_indentation_module import text_indentation
+
+Now use it to print the text with indentation:
+
+    >>> text_indentation("Hello. How are you? I am fine: Thanks for asking.")
+    Hello.
+
+    How are you?
+
+    I am fine:
+
+    Thanks for asking.
+
+Printing a text without special characters:
+
+    >>> text_indentation("This is a string with no special characters")
+    This is a string with no special characters
+
+Printing a text with multiple special characters:
+
+    >>> text_indentation("This: is a string. with multiple. special characters?:")
+    This:
+
+    is a string.
+
+    with multiple.
+
+    special characters?:
+
+Attempting to pass a non-string argument (Error Case):
+
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+The ``text_indentation`` function prints the text with two new lines after each of these characters: '.', '?', and ':'.
