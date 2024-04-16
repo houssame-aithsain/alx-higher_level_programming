@@ -7,8 +7,9 @@ def append_after(filename="", search_string="", new_string=""):
     with open(filename, 'r+') as file:
         lines = file.readlines()
         file.seek(0)
-        for line in lines:
-            file.write(line)
-            if search_string in line:
-                file.write(new_string + '\n')
+        cd = []
+        for line in range(len(lines)):
+            cd.append(lines[line])
+            if search_string in lines[line]:
+                cd.append(new_string)
         file.truncate()
