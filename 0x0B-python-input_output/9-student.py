@@ -5,7 +5,6 @@
 class Student:
     """Defines a student by first_name, last_name, and age."""
 
-
     def __init__(self, first_name, last_name, age):
         """Initialize a Student instance with first_name, last_name, and age."""
 
