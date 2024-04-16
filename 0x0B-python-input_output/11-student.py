@@ -3,16 +3,16 @@
 
 
 class Student:
-    """Defines a student by first_name, last_name, and age."""
+    """Defines a student by first_name, last_name"""
 
     def __init__(self, first_name, last_name, age):
-        """Initialize a Student instance with first_name, last_name, and age."""
+        """Initialize a new Student."""
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self, attrs=None):
-        """Retrieve a dictionary representation of a Student instance."""
+        """Retrieve a dictionary"""
         if attrs is None:
             return self.__dict__
         else:
@@ -20,6 +20,6 @@ class Student:
                     for attr in attrs if hasattr(self, attr)}
 
     def reload_from_json(self, json):
-        """Replace all attributes of the Student instance with values from a dictionary."""
+        """Replace all attributes"""
         for key, value in json.items():
             setattr(self, key, value)
