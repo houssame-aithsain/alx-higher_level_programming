@@ -28,7 +28,8 @@ def parse_input():
     line_count = 0
     try:
         for line in sys.stdin:
-            total_size, status_codes = parse_line(line.strip(), total_size, status_codes)
+            total_size, status_codes = parse_line(line.strip()
+                                                  , total_size, status_codes)
             line_count += 1
             if line_count % 10 == 0:
                 print_statistics(total_size, status_codes)
