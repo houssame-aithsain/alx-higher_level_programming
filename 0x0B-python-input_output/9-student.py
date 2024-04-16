@@ -3,15 +3,14 @@
 
 
 class Student:
-    """Defines a student by first_name, last_name, and age."""
+    ''' Student class '''
 
     def __init__(self, first_name, last_name, age):
-        """Initialize a Student instance with first_name, last_name, and age."""
-
+        ''' Constructor method '''
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self):
-        """Retrieve a dictionary representation of a Student instance."""
+        ''' Method that returns directory description '''
         return self.__dict__.copy()
