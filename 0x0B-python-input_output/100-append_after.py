@@ -13,3 +13,4 @@ def append_after(filename="", search_string="", new_string=""):
             if search_string in lines[line]:
                 cd.append(new_string)
         file.truncate()
+        file.write("".join(cd))
