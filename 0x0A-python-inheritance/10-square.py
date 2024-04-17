@@ -1,13 +1,20 @@
 #!/usr/bin/python3
-"""Defines a class Square that inherits from Rectangle."""
+"""
+more class base
+"""
 
 
 Rectangle = __import__('9-rectangle').Rectangle
 
 
+"""
+Square class
+"""
+
+
 class Square(Rectangle):
-    """Represent a square using Rectangle."""
+    """ Square Class """
     def __init__(self, size):
-        """Initialize a new square."""
-        super().__init__(self.__size, self.__size)
+        """ instantiation with size """
         self.__size = size
+        super().__init__(self.__size, self.__size)
