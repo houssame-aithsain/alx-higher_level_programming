@@ -1,0 +1,41 @@
+7-base_geometry.txt module
+====================
+
+Importing the class from the module:
+>>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+
+Checking for module docstring:
+>>> m = __import__("7-base_geometry").__doc__
+>>> len(m) > 1
+True
+
+Checking for class docstring:
+>>> c = __import__("7-base_geometry").BaseGeometry.__doc__
+>>> len(c) > 1
+True
+
+Checking for method docstrings
+>>> f1 = __import__("7-base_geometry").BaseGeometry.area.__doc__
+>>> len(f1) > 1
+True
+>>> f2 = __import__("7-base_geometry").BaseGeometry.integer_validator.__doc__
+>>> len(f2) > 1
+True
+
+Checking area method
+>>> obj = BaseGeometry()
+>>> obj.area()
+Traceback (most recent call last):
+    ...
+Exception: area() is not implemented
+
+Checking integer_validator method
+>>> obj.integer_validator("width", 10)
+>>> obj.integer_validator("width", -10)
+Traceback (most recent call last):
+    ...
+ValueError: width must be greater than 0
+>>> obj.integer_validator("width", "10")
+Traceback (most recent call last):
+    ...
+TypeError: width must be an integer
