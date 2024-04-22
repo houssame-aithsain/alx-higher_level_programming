@@ -83,7 +83,7 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """Return a list of classes."""
+        """Read the CSV."""
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, "r", newline="") as csvfile:
@@ -91,9 +91,14 @@ class Base:
                     fieldnames = ["id", "width", "height", "x", "y"]
                 else:
                     fieldnames = ["id", "size", "x", "y"]
-                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dicts = [dict([k, int(v)] for k, v in d.items())
-                              for d in list_dicts]
-                return [cls.create(**d) for d in list_dicts]
+                reader = csv.DictReader(csvfile, fieldnames=fieldnames)
+                list_dict = []
+                for row in reader:
+                    for key in row:
+                        row[key] = int(row[key])
+                    list_dict.append(row)
+                list_objs = [cls.create(**d) for d in list_dict]
+                return list_objs
         except IOError:
             return []
+
