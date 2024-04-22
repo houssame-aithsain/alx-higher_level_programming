@@ -52,3 +52,28 @@ class Base:
             dummy = cls(1)
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """ Load from file method """
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, "r") as f:
+                list_dict = cls.from_json_string(f.read())
+            list_inst = []
+            for dict in list_dict:
+                list_inst.append(cls.create(**dict))
+            return list_inst
+        except:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """ Save to file csv method """
+        filename = cls.__name__ + ".csv"
+        list_dict = []
+        if list_objs is not None:
+            for obj in list_objs:
+                list_dict.append(obj.to_dictionary())
+        with open(filename, "w") as f:
+            f.write(cls.to_json_string(list_dict))
