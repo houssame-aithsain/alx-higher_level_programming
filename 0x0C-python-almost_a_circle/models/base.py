@@ -94,7 +94,7 @@ class Base:
             return []
     @staticmethod
     def draw(list_rectangles, list_squares):
-        """Draw Rectangles and Squares using the turtle module."""
+        """Draw Rectangles and Squares."""
         turt = turtle.Turtle()
         turt.screen.bgcolor("#b7312c")
         turt.pensize(3)
@@ -112,7 +112,6 @@ class Base:
                 turt.forward(rect.height)
                 turt.left(90)
             turt.hideturtle()
-
         turt.color("#b5e3d8")
         for sq in list_squares:
             turt.showturtle()
@@ -125,5 +124,4 @@ class Base:
                 turt.forward(sq.height)
                 turt.left(90)
             turt.hideturtle()
-
         turtle.exitonclick()
