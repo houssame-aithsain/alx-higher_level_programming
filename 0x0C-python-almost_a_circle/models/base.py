@@ -7,69 +7,69 @@ import turtle
 
 
 class Base:
-    """ Base class """
-    __nb_objects = 0
+	""" Base class """
+	__nb_objects = 0
 
-    def __init__(self, id=None):
-        """ Init method """
-        if id is not None:
-            self.id = id
-        else:
-            Base.__nb_objects += 1
-            self.id = Base.__nb_objects
+	def __init__(self, id=None):
+		""" Init method """
+		if id is not None:
+			self.id = id
+		else:
+			Base.__nb_objects += 1
+			self.id = Base.__nb_objects
 
-    @staticmethod
-    def to_json_string(list_dictionaries):
-        """ To json string method """
-        if list_dictionaries is None or list_dictionaries == []:
-            return "[]"
-        return json.dumps(list_dictionaries)
+	@staticmethod
+	def to_json_string(list_dictionaries):
+		""" To json string method """
+		if list_dictionaries is None or list_dictionaries == []:
+			return "[]"
+		return json.dumps(list_dictionaries)
 
-    @classmethod
-    def save_to_file(cls, list_objs):
-        """ Save to file method """
-        filename = cls.__name__ + ".json"
-        list_dict = []
-        if list_objs is not None:
-            for obj in list_objs:
-                list_dict.append(obj.to_dictionary())
-        with open(filename, "w") as f:
-            f.write(cls.to_json_string(list_dict))
+	@classmethod
+	def save_to_file(cls, list_objs):
+		""" Save to file method """
+		filename = cls.__name__ + ".json"
+		list_dict = []
+		if list_objs is not None:
+			for obj in list_objs:
+				list_dict.append(obj.to_dictionary())
+		with open(filename, "w") as f:
+			f.write(cls.to_json_string(list_dict))
 
-    @staticmethod
-    def from_json_string(json_string):
-        """ From json string method """
-        if json_string is None or json_string == "":
-            return []
-        return json.loads(json_string)
+	@staticmethod
+	def from_json_string(json_string):
+		""" From json string method """
+		if json_string is None or json_string == "":
+			return []
+		return json.loads(json_string)
 
-    @classmethod
-    def create(cls, **dictionary):
-        """ Create method """
-        if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        if cls.__name__ == "Square":
-            dummy = cls(1)
-        dummy.update(**dictionary)
-        return dummy
+	@classmethod
+	def create(cls, **dictionary):
+		""" Create method """
+		if cls.__name__ == "Rectangle":
+			dummy = cls(1, 1)
+		if cls.__name__ == "Square":
+			dummy = cls(1)
+		dummy.update(**dictionary)
+		return dummy
 
-    @classmethod
-    def load_from_file(cls):
-        """Return a list of classes instantiated from a file of JSON strings.
+	@classmethod
+	def load_from_file(cls):
+		"""Return a list of classes instantiated from a file of JSON strings.
 
-        Reads from `<cls.__name__>.json`.
+		Reads from `<cls.__name__>.json`.
 
-        Returns:
-            If the file does not exist - an empty list.
-            Otherwise - a list of instantiated classes.
-        """
-        filename = str(cls.__name__) + ".json"
-        try:
-            with open(filename, "r") as f:
-                list_dict = cls.from_json_string(f.read())
-            list_inst = []
-            for dict in list_dict:
-                list_inst.append(cls.create(**dict))
-            return list_inst
-        except:
-            return []
+		Returns:
+			If the file does not exist - an empty list.
+			Otherwise - a list of instantiated classes.
+		"""
+		filename = str(cls.__name__) + ".json"
+		try:
+			with open(filename, "r") as f:
+				list_dict = cls.from_json_string(f.read())
+			list_inst = []
+			for dict in list_dict:
+				list_inst.append(cls.create(**dict))
+			return list_inst
+		except:
+			return []
