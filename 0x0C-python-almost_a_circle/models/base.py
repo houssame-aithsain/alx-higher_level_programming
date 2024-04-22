@@ -80,3 +80,23 @@ class Base:
                 writer.writeheader()
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """ Load from file csv method """
+        filename = cls.__name__ + ".csv"
+        list_objs = []
+        try:
+            with open(filename, "r") as f:
+                if cls.__name__ == "Rectangle":
+                    fields = ["id", "width", "height", "x", "y"]
+                if cls.__name__ == "Square":
+                    fields = ["id", "size", "x", "y"]
+                reader = csv.DictReader(f, fieldnames=fields)
+                for row in reader:
+                    for key in row:
+                        row[key] = int(row[key])
+                    list_objs.append(cls.create(**row))
+                return list_objs
+        except IOError:
+            return []
