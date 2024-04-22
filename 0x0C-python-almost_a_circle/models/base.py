@@ -56,39 +56,34 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
-        """ Load from file method """
-        filename = cls.__name__ + ".json"
+        """Return a list of classes."""
+        filename = str(cls.__name__) + ".json"
         try:
-            with open(filename, "r") as f:
-                list_dict = cls.from_json_string(f.read())
-            list_inst = []
-            for dict in list_dict:
-                list_inst.append(cls.create(**dict))
-            return list_inst
-        except:
+            with open(filename, "r") as jsonfile:
+                list_dicts = Base.from_json_string(jsonfile.read())
+                return [cls.create(**d) for d in list_dicts]
+        except IOError:
             return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """ Save to file csv method """
+        """Write the CSV."""
         filename = cls.__name__ + ".csv"
-        list_dict = []
-        if list_objs is not None:
-            for obj in list_objs:
-                list_dict.append(obj.to_dictionary())
-        with open(filename, "w") as f:
-            f.write(cls.to_json_string(list_dict))
+        with open(filename, "w", newline="") as csvfile:
+            if list_objs is None or list_objs == []:
+                csvfile.write("[]")
+            else:
+                if cls.__name__ == "Rectangle":
+                    fieldnames = ["id", "width", "height", "x", "y"]
+                else:
+                    fieldnames = ["id", "size", "x", "y"]
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                for obj in list_objs:
+                    writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
-        """Return a list of classes instantiated from a CSV file.
-
-        Reads from `<cls.__name__>.csv`.
-
-        Returns:
-            If the file does not exist - an empty list.
-            Otherwise - a list of instantiated classes.
-        """
+        """Return a list of classes."""
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, "r", newline="") as csvfile:
