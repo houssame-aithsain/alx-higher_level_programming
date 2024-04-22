@@ -69,36 +69,31 @@ class Base:
     def save_to_file_csv(cls, list_objs):
         """Write the CSV."""
         filename = cls.__name__ + ".csv"
-        with open(filename, "w", newline="") as csvfile:
+        with open(filename, "w", newline="") as f:
             if list_objs is None or list_objs == []:
-                csvfile.write("[]")
+                f.write("[]")
             else:
                 if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
                 else:
                     fieldnames = ["id", "size", "x", "y"]
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
 
     @classmethod
     def load_from_file_csv(cls):
-        """Read the CSV."""
+        """Return a list of classes."""
         filename = cls.__name__ + ".csv"
         try:
-            with open(filename, "r", newline="") as csvfile:
+            with open(filename, "r", newline="") as f:
                 if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
                 else:
                     fieldnames = ["id", "size", "x", "y"]
-                reader = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dict = []
-                for row in reader:
-                    for key in row:
-                        row[key] = int(row[key])
-                    list_dict.append(row)
-                list_objs = [cls.create(**d) for d in list_dict]
-                return list_objs
+                list_dicts = csv.DictReader(f, fieldnames=fieldnames)
+                list_dicts = [dict([k, int(v)] for k, v in d.items())
+                              for d in list_dicts]
+                return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
-
