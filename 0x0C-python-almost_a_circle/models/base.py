@@ -92,6 +92,7 @@ class Base:
             return list_inst
         except:
             return []
+
     @staticmethod
     def draw(list_rectangles, list_squares):
         """Draw Rectangles and Squares."""
