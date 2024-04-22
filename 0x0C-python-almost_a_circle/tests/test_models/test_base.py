@@ -1,22 +1,87 @@
 #!/usr/bin/python3
-"""Defines unittests for base.py.
+"""Unittest for Base class"""
 
-Unittest classes:
-    TestBase_instantiation - line 21
-    TestBase_to_json_string - line 108
-    TestBase_save_to_file - line 154
-    TestBase_from_json_string - line 232
-    TestBase_create - line 286
-    TestBase_load_from_file - line 338
-    TestBase_save_to_file_csv - line 404
-    TestBase_load_from_file_csv - line 482
-"""
-import os
 import unittest
+import json
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
+import os
 
+
+class TestBase(unittest.TestCase):
+    """Test Base class"""
+
+    def setUp(self):
+        """Set up for all methods"""
+        Base._Base__nb_objects = 0
+
+    def test_base(self):
+        """Test base"""
+        b1 = Base()
+        self.assertEqual(b1.id, 1)
+        b2 = Base()
+        self.assertEqual(b2.id, 2)
+        b3 = Base(12)
+        self.assertEqual(b3.id, 12)
+        b4 = Base()
+        self.assertEqual(b4.id, 3)
+
+    def test_base_to_json_string(self):
+        """Test base to json string"""
+        r1 = Rectangle(10, 7, 2, 8)
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        self.assertEqual(type(dictionary), dict)
+        self.assertEqual(type(json_dictionary), str)
+
+    def test_base_to_json_string_empty(self):
+        """Test base to json string empty"""
+        json_dictionary = Base.to_json_string([])
+        self.assertEqual(json_dictionary, "[]")
+
+    def test_base_to_json_string_none(self):
+        """Test base to json string none"""
+        json_dictionary = Base.to_json_string(None)
+        self.assertEqual(json_dictionary, "[]")
+
+    def test_base_from_json_string(self):
+        """Test base from json string"""
+        json_dictionary = '[{"id": 89, "width": 10, "height": 4, "x": 7, "y": 8}]'
+        list_output = Base.from_json_string(json_dictionary)
+        self.assertEqual(type(list_output), list)
+
+    def test_base_from_json_string_empty(self):
+        """Test base from json string empty"""
+        json_dictionary = '[]'
+        list_output = Base.from_json_string(json_dictionary)
+        self.assertEqual(list_output, [])
+
+    def test_base_from_json_string_none(self):
+        """Test base from json string none"""
+        json_dictionary = None
+        list_output = Base.from_json_string(json_dictionary)
+        self.assertEqual(list_output, [])
+
+    def test_base_create(self):
+        """Test base create"""
+        r1 = Rectangle(3, 5, 1, 2, 10)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual(type(r1), Rectangle)
+        self.assertEqual(type(r2), Rectangle)
+        self.assertNotEqual(r1, r2)
+
+    def test_base_load_from_file(self):
+        """Test base load from file"""
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_input = [r1, r2]
+        Rectangle.save_to_file(list_input)
+        list_output = Rectangle.load_from_file()
+        self.assertEqual(type(list_input), list)
+        self.assertEqual(type(list_output), list)
+        self.assertNotEqual(list_input, list_output)
 
 class TestBase_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the Base class."""
@@ -543,7 +608,6 @@ class TestBase_load_from_file_csv(unittest.TestCase):
     def test_load_from_file_csv_more_than_one_arg(self):
         with self.assertRaises(TypeError):
             Base.load_from_file_csv([], 1)
-
 
 if __name__ == "__main__":
     unittest.main()
