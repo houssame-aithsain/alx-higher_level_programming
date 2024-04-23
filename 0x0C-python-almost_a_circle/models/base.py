@@ -97,3 +97,32 @@ class Base:
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draw the shapes."""
+        t = turtle.Turtle()
+        t.speed(0)
+        for rect in list_rectangles:
+            t.penup()
+            t.goto(rect.x, rect.y)
+            t.pendown()
+            t.color("red")
+            t.begin_fill()
+            for _ in range(2):
+                t.forward(rect.width)
+                t.right(90)
+                t.forward(rect.height)
+                t.right(90)
+            t.end_fill()
+        for square in list_squares:
+            t.penup()
+            t.goto(square.x, square.y)
+            t.pendown()
+            t.color("blue")
+            t.begin_fill()
+            for _ in range(4):
+                t.forward(square.width)
+                t.right(90)
+            t.end_fill()
+        turtle.done()
