@@ -1,5 +1,5 @@
 -- Create a table temperatures with the following structure:
-SELECT `city`, AVG(`temperature`) AS `avg_temp`
+SELECT `city`, AVG(`value`) AS `avg_temp`
 FROM `temperatures`
 GROUP BY `city`
 ORDER BY `avg_temp` DESC;
