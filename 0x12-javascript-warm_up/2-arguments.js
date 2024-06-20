@@ -1,14 +1,14 @@
 #!/usr/bin/node
 // Script that passed:
 
-const n = process.argv[2];
+const args = process.argv.slice(2);
 
-function fac (n) {
-    if (n <= 1 || isNaN(n)) {
-        return 1;
-    } else {
-        return n * fac(n - 1);
-    }
-    }
-
-    console.log(fac(n));
+if (args.length === 0) {
+  console.log("No argument");
+} 
+else if (args.length === 1 ){
+  console.log("Argument found");
+}
+else {
+  console.log("Arguments found");
+}
