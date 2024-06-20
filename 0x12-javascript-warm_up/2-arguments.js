@@ -1,9 +1,8 @@
 #!/usr/bin/node
-// Script that passed:
-
+// Access command line arguments (excluding the first two)
 const args = process.argv.slice(2);
 
-// If no argument passed to the script, print “No argument”
+// Check the number of arguments
 if (args.length === 0) {
   console.log("No argument");
 } 
