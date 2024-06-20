@@ -1,12 +1,19 @@
 #!/usr/bin/node
 // Script that passed:
 
-const args = process.argv.slice(2);
+function f (n) {
+    if (n === 1) {
+      return (1);
+    }
+    return (n * f(n - 1));
+}
+  
+const args = process.argv;
 
-if (args.length === 0) {
-    console.log("No argument");
-} else if (args.length === 1) {
-    console.log("Argument found");
-} else {
-    console.log("Arguments found");
+if (isNaN(args[2])) {
+  console.log('1');
+}
+else {
+  let num = f(parseInt(args[2], 10));
+  console.log(num);
 }
