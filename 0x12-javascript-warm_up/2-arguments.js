@@ -1,13 +1,12 @@
 #!/usr/bin/node
 // Access command line arguments (excluding the first two)
 
-const count = process.argv.length;
+const arg = process.argv.slice(2);
 
-// Check the number of arguments
-if (count === 0) {
+if (arg.length === 0) {
   console.log("No argument");
 } 
-else if (count === 1 ){
+else if (arg.length === 1 ){
   console.log("Argument found");
 }
 else {
