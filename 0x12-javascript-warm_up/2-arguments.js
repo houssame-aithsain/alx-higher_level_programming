@@ -1,19 +1,14 @@
 #!/usr/bin/node
 // Script that passed:
 
-function f (n) {
-    if (n === 1) {
-      return (1);
-    }
-    return (n * f(n - 1));
-}
-  
-const args = process.argv;
+const n = process.argv[2];
 
-if (isNaN(args[2])) {
-  console.log('1');
+function fac (n) {
+  if (n <= 1 || isNaN(n)) {
+    return 1;
+  } else {
+    return n * fac(n - 1);
+  }
 }
-else {
-  let num = f(parseInt(args[2], 10));
-  console.log(num);
-}
+
+console.log(fac(n));
