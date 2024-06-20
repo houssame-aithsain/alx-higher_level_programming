@@ -1,6 +1,7 @@
 #!/usr/bin/node
 // Access command line arguments (excluding the first two)
-const args = process.argv.slice(2);
+
+const args = process.argv[2];
 
 // Check the number of arguments
 if (args.length === 0) {
