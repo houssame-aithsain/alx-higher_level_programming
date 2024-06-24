@@ -16,3 +16,5 @@ if __name__ == '__main__':
     rs = liSt.fetchall()
     for i in rs:
         print(i)
+    rs.close()
+    liSt.close()
