@@ -1,4 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+"""
+this script lists all states from the database
+hbtn_0e_0_usa where the name starts with N
+"""
 
 
 import MySQLdb
