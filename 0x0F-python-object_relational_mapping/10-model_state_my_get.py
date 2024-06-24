@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script that prints the State object with the name passed as argument from the database hbtn_0e_6_usa
+Script that prints the State object with the name passed as argument
 """
 
 import sys
@@ -15,9 +15,9 @@ if __name__ == "__main__":
     database_name = sys.argv[3]
     state_name = sys.argv[4]
 
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(mysql_username, mysql_password, database_name),
-                           pool_pre_ping=True)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}\
+                           '.format(mysql_username, mysql_password,
+                                    database_name), pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
 
