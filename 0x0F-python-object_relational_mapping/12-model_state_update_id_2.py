@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Adds a new State object to the database
+Script that changes the name of a State object from the database hbtn_0e_6_usa
 """
-
 
 import sys
 from sqlalchemy import create_engine
@@ -16,15 +15,14 @@ if __name__ == "__main__":
     db_name = sys.argv[3]
 
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(username, password, db_name))
-
+                           .format(username, password, db_name),
+                           pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    new_state = State(name="Louisiana")
+    state = session.query(State).filter(State.id == 2).first()
+    if state:
+        state.name = "New Mexico"
+        session.commit()
 
-    session.add(new_state)
-
-    session.commit()
-
-    print(new_state.id)
+    session.close()
