@@ -1,3 +1,3 @@
 #!/bin/bash
-# This script takes in a URL, sends a request to that URL
-curl -Is "$1" | grep -w 'Content-Length' | cut -f2 -d' '
+# This script sends a request to a URL and displays the size of the body of the response in bytes
+curl -s "$1" | wc -c
