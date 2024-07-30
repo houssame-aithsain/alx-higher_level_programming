@@ -2,19 +2,23 @@
 
 const request = require('request');
 
-const url = process.argv[2];
-const characterId = 18;
+const apiUrl = process.argv[2];
+const wedgeAntillesId = 18;
 
-request(url, function (err, response, body) {
-  if (!err) {
-    const { results } = JSON.parse(body);
-
-    // Using reduce to count movies with characterId 18
-    const count = results.reduce((count, film) => {
-      const hasCharacterWithId18 = film.characters.find((character) => character.endsWith(`/api/people/${characterId}/`));
-      return hasCharacterWithId18 ? count + 1 : count;
-    }, 0);
-
-    console.log(count);
+request(apiUrl, (error, response, body) => {
+  if (error) {
+    console.error(error);
+    return;
   }
+
+  const films = JSON.parse(body).results;
+
+  const wedgeAntillesCount = films.reduce((count, film) => {
+    const hasWedgeAntilles = film.characters.some(characterUrl => 
+      characterUrl.endsWith(`/api/people/${wedgeAntillesId}/`)
+    );
+    return hasWedgeAntilles ? count + 1 : count;
+  }, 0);
+
+  console.log(wedgeAntillesCount);
 });
